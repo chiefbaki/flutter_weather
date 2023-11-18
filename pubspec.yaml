@@ -64,6 +64,10 @@ flutter:
     - assets/img/sun1.png
     - assets/img/moon1.png
     - assets/img/cloud1.png
+    - assets/img/sun2.png
+    - assets/img/crescent-moon1.png
+    - assets/img/rain1.png
+    - assets/img/snowflake2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -75,13 +79,11 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  #example:
+  fonts:
+    - family: Calistoga
+      fonts:
+        - asset: assets/fonts/Calistoga-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
