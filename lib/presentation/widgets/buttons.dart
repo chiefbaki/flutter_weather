@@ -15,7 +15,7 @@ class _ThemeChangeBtnState extends State<ThemeChangeBtn> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(30),
         color: AppColors.circleBackground,
       ),
       child: IconButton(onPressed: widget.changeTheme,

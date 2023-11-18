@@ -53,7 +53,23 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 20.h,
                 ),
-                
+                Image.asset("assets/img/sun1.png", width: 100.w, height: 100.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text("11", style: AppFonts.s72w700.copyWith(color: Colors.white),),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text("May XX, 20XX", style: AppFonts.s22w400.copyWith(color: Colors.white),),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  children: [
+                    Text("Monday", style: AppFonts.s20w400,)
+                  ],
+                )
               ],
             ),
           ),
