@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather/presentation/theme/app_colors.dart';
 import 'package:weather/presentation/theme/app_fonts.dart';
 import 'package:weather/presentation/widgets/buttons.dart';
+import 'package:weather/presentation/widgets/weather_row.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ThemeChangeBtn(changeTheme: changeTheme, themeState: themeState,),
                     SizedBox(width: 20.w,),
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Image.asset("assets/img/sun1.png", width: 100.w, height: 100.h,),
+                Image.asset("assets/img/sun1.png", width: 100, height: 100,),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -63,13 +64,9 @@ class _HomeState extends State<Home> {
                 ),
                 Text("May XX, 20XX", style: AppFonts.s22w400.copyWith(color: Colors.white),),
                 SizedBox(
-                  height: 10.h,
+                  height: 20.h,
                 ),
-                Row(
-                  children: [
-                    Text("Monday", style: AppFonts.s20w400,)
-                  ],
-                )
+                WeatherRow(),
               ],
             ),
           ),
