@@ -27,13 +27,22 @@ class _HomeState extends State<Home> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ThemeChangeBtn(changeTheme: changeTheme),
-              Text("Hello")
-            ],
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ThemeChangeBtn(changeTheme: changeTheme, themeState: themeState,),
+                    Text("Hello")
+                  ],
+                )
+                
+              ],
+            ),
           ),
         ),
       ),
