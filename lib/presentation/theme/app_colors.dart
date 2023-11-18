@@ -6,4 +6,5 @@ abstract class AppColors {
     Color(0xff2F2CBC)
   ];
   static const List<Color> bgColorDark = [Color(0xff223076), Color(0xff06050E)];
+  static const Color circleBackground = Color(0xffD9D9D9);
 }
