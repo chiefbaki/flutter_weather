@@ -34,8 +34,10 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(15.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 60.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -64,8 +66,9 @@ class _HomeState extends State<Home> {
                 ),
                 Text("May XX, 20XX", style: AppFonts.s22w400.copyWith(color: Colors.white),),
                 SizedBox(
-                  height: 20.h,
+                  height: 60.h,
                 ),
+                
                 WeatherRow(),
               ],
             ),
