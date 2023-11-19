@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.9.0
+  dio: ^5.3.3
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +68,7 @@ flutter:
     - assets/img/sun2.png
     - assets/img/crescent-moon1.png
     - assets/img/rain1.png
-    - assets/img/snowflake2.png
+    - assets/img/snowflake1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

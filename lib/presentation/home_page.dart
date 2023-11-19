@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather/presentation/theme/app_colors.dart';
@@ -14,19 +15,61 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool themeState = true;
-    
-  void changeTheme(){
+
+  void changeTheme() {
     setState(() {
       themeState = !themeState;
     });
   }
-     
+
+  Map<String, dynamic> bishkek = {};
+  Map<String, dynamic> london = {};
+  Map<String, dynamic> moscow = {};
+  Map<String, dynamic> dublin = {};
+  Map<String, dynamic> paris = {};
+  Map<String, dynamic> ulaanbaator = {};
+
+  late dynamic weatherState;
+
+  void fromApi(String city) async {
+    const _URL = "https://api.weatherapi.com/v1/current.json";
+    Dio dio = Dio();
+    try {
+      Response response = await dio.get(_URL, queryParameters: {
+        "key": "b380621b698443fb80f105105231911",
+        "q": city,
+        "aqi": "no"
+      });
+      setState(() {
+        weatherState = response.data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void initState() {
+    super.initState();
+    //bishkek = fromApi("Bishkek");
+    //fromApi("Paris");
+    //fromApi("Paris");
+    //fromApi("Dublin");
+    // fromApi("Ulaanbator");
+    //print("init");
+    print("updated");
+  }
+
+  
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: themeState == true ? AppColors.bgColorLight : AppColors.bgColorDark, begin: Alignment.bottomLeft, end: Alignment.topRight),
+        gradient: LinearGradient(
+            colors: themeState == true
+                ? AppColors.bgColorLight
+                : AppColors.bgColorDark,
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -41,9 +84,17 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    ThemeChangeBtn(changeTheme: changeTheme, themeState: themeState,),
-                    SizedBox(width: 20.w,),
-                    Text("San Francisco", style: AppFonts.s36w400.copyWith(color: Colors.white),),
+                    ThemeChangeBtn(
+                      changeTheme: changeTheme,
+                      themeState: themeState,
+                    ),
+                    SizedBox(
+                      width: 20.w,
+                    ),
+                    Text(
+                      "San Francisco",
+                      style: AppFonts.s36w400.copyWith(color: Colors.white),
+                    ),
                     SizedBox(
                       height: 20.w,
                     ),
@@ -52,24 +103,39 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Text("Clear", style: AppFonts.s24w400.copyWith(color: Colors.white),),
+                Text(
+                  "Clear",
+                  style: AppFonts.s24w400.copyWith(color: Colors.white),
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
-                Image.asset("assets/img/sun1.png", width: 100, height: 100,),
+                Image.asset(
+                  themeState == true
+                      ? "assets/img/sun1.png"
+                      : "assets/img/moon1.png",
+                  width: 100,
+                  height: 100,
+                ),
                 SizedBox(
                   height: 10.h,
                 ),
-                Text("11", style: AppFonts.s72w700.copyWith(color: Colors.white),),
+                Text(
+                  "11",
+                  style: AppFonts.s72w700.copyWith(color: Colors.white),
+                ),
                 SizedBox(
                   height: 10.h,
                 ),
-                Text("May XX, 20XX", style: AppFonts.s22w400.copyWith(color: Colors.white),),
+                Text(
+                  "May XX, 20XX",
+                  style: AppFonts.s22w400.copyWith(color: Colors.white),
+                ),
                 SizedBox(
                   height: 60.h,
                 ),
-                
                 WeatherRow(),
+               // Text(weatherState["location"]["name"])
               ],
             ),
           ),
