@@ -29,24 +29,6 @@ class _HomeState extends State<Home> {
   Map<String, dynamic> paris = {};
   Map<String, dynamic> ulaanbaator = {};
 
-  late dynamic weatherState;
-
-  void fromApi(String city) async {
-    const _URL = "https://api.weatherapi.com/v1/current.json";
-    Dio dio = Dio();
-    try {
-      Response response = await dio.get(_URL, queryParameters: {
-        "key": "b380621b698443fb80f105105231911",
-        "q": city,
-        "aqi": "no"
-      });
-      setState(() {
-        weatherState = response.data;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
 
   void initState() {
     super.initState();
@@ -134,7 +116,7 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 60.h,
                 ),
-                WeatherRow(),
+                WeatherRow()
                // Text(weatherState["location"]["name"])
               ],
             ),
