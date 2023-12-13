@@ -13,7 +13,7 @@ class WeatherRow extends StatefulWidget {
 class _WeatherRowState extends State<WeatherRow> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 320.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

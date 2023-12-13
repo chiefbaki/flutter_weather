@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather/presentation/theme/app_colors.dart';
@@ -21,13 +20,6 @@ class _HomeState extends State<Home> {
       themeState = !themeState;
     });
   }
-
-  Map<String, dynamic> bishkek = {};
-  Map<String, dynamic> london = {};
-  Map<String, dynamic> moscow = {};
-  Map<String, dynamic> dublin = {};
-  Map<String, dynamic> paris = {};
-  Map<String, dynamic> ulaanbaator = {};
 
 
   void initState() {
