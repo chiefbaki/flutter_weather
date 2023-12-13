@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:weather/data/models/wather_model.dart';
+import 'package:weather/data/repositories/get_weather_repo.dart';
 import 'package:weather/presentation/theme/app_colors.dart';
 import 'package:weather/presentation/theme/app_fonts.dart';
 import 'package:weather/presentation/widgets/buttons.dart';
@@ -21,19 +24,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-
-  void initState() {
-    super.initState();
-    //bishkek = fromApi("Bishkek");
-    //fromApi("Paris");
-    //fromApi("Paris");
-    //fromApi("Dublin");
-    // fromApi("Ulaanbator");
-    //print("init");
-    print("updated");
-  }
-
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,75 +35,96 @@ class _HomeState extends State<Home> {
             begin: Alignment.bottomLeft,
             end: Alignment.topRight),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 60.h,
+      child: FutureBuilder(
+        future: GetWeatherRepo().getWeather(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.data);
+            try {
+              WeatherModel model = snapshot.data!;
+            } catch (e) {
+              print(e.toString());
+            }
+            WeatherModel model = snapshot.data ?? WeatherModel();
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 60.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ThemeChangeBtn(
+                            changeTheme: changeTheme,
+                            themeState: themeState,
+                          ),
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          Text(
+                            model.name ?? '',
+                            style:
+                                AppFonts.s36w400.copyWith(color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 20.w,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        model.weather?.first.main ?? '',
+                        style: AppFonts.s24w400.copyWith(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Image.network(
+                        'https://openweathermap.org/img/wn/${model.weather?.first.icon}@2x.png',
+                        width: 100,
+                        height: 100,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                          Icons.error,
+                          size: 100,
+                          color: Colors.red,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        model.main?.temp.toString() ?? '',
+                        style: AppFonts.s72w700.copyWith(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "${DateTime.now()}",
+                        style: AppFonts.s22w400.copyWith(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 60.h,
+                      ),
+                      const WeatherRow()
+                      // Text(weatherState["location"]["name"])
+                    ],
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ThemeChangeBtn(
-                      changeTheme: changeTheme,
-                      themeState: themeState,
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text(
-                      "San Francisco",
-                      style: AppFonts.s36w400.copyWith(color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 20.w,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Text(
-                  "Clear",
-                  style: AppFonts.s24w400.copyWith(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Image.asset(
-                  themeState == true
-                      ? "assets/img/sun1.png"
-                      : "assets/img/moon1.png",
-                  width: 100,
-                  height: 100,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "11",
-                  style: AppFonts.s72w700.copyWith(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "May XX, 20XX",
-                  style: AppFonts.s22w400.copyWith(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 60.h,
-                ),
-                WeatherRow()
-               // Text(weatherState["location"]["name"])
-              ],
-            ),
-          ),
-        ),
+              ),
+            );
+          }
+
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
