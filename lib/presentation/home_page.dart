@@ -21,19 +21,10 @@ class _HomeState extends State<Home> {
     });
   }
 
-
   void initState() {
     super.initState();
-    //bishkek = fromApi("Bishkek");
-    //fromApi("Paris");
-    //fromApi("Paris");
-    //fromApi("Dublin");
-    // fromApi("Ulaanbator");
-    //print("init");
-    print("updated");
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,7 +100,7 @@ class _HomeState extends State<Home> {
                   height: 60.h,
                 ),
                 WeatherRow()
-               // Text(weatherState["location"]["name"])
+                // Text(weatherState["location"]["name"])
               ],
             ),
           ),
